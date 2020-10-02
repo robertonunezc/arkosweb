@@ -38,20 +38,7 @@ layout: "base.njk"
                         <div class="separater"></div>
                         <h2>ARKOS</h2>
                     </div>
-                    <div class="text">
-                        <p>
-                            Arkos S.A. de C.V. es una empresa productora y desarrolladora del Panel SIP, sigla
-                            en inglés Structural Insulated Panel o Panel Estructural Isotérmico, Los paneles SIP
-                            están conformados por un alma o Núcleo de Poliestireno Expandido de alta
-                            densidad (EPS HD), adherido con un adhesivo estructural a dos placas que pueden
-                            ser de OSB, contrachapado, fibrocemento u otro material, en nuestro caso son
-                            láminas de material mineral con fibra de vidrio que le dan a nuestro panel su
-                            resistencia estructural.
-                        </p>
-                        <p> Nos distinguimos por mantener en constante perfeccionamiento y desarrollo
-                            la tecnología, incluyendo de forma inmediata todos los avances tecnológicos
-                            que surgen en cada localidad y dedicando grandes esfuerzos a un amplio
-                            programa de Investigación y Desarrollo.</p>
+                    <div class="text" id="quienes-somos-description">
                     </div>
                     <div class="clearfix">
                         <div class="pull-left">
@@ -65,3 +52,36 @@ layout: "base.njk"
     </div>
 </section>
 <!-- End About Section -->
+<script>
+    class App {
+        constructor() {
+            this.$quienesSomosContenedor = document.querySelector('#quienes-somos-description');
+        }
+        async getData() {
+            let response = await fetch("http://localhost:8000/api/quienes-somos/");
+            if (response.ok) {
+                return await response.json()
+            } else {
+                alert("HTTP-Error: " + response.status);
+                return response.status;
+            }
+        }
+
+        renderData(data) {
+            console.log(data)
+            this.$quienesSomosContenedor.innerHTML = data.map(function (item) {
+                return `<p>${item.historia}</p>`
+            });
+        }
+    }
+
+    const app = new App();
+    app.getData()
+        .then(function (data) {
+            app.renderData(data);
+        }).catch(function (error) {
+            alert(error);
+            console.error(error)
+        });
+
+</script>
