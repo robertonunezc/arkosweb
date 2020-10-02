@@ -143,9 +143,7 @@
                                         <li class="">
                                             <a href="/recursos/">Recursos</a>
                                         </li>
-                                        {# <li class="">
-                                            <a href="#">Galería</a>
-                                        </li> #}
+                                        
                                         <li class="">
                                             <a href="/proyectos/">Proyectos</a>
                                         </li>
@@ -181,7 +179,135 @@
 
             </header>
             <!-- End Main Header -->
-            {{ content | safe }}
+            <!-- Page Title -->
+<section class="page-title" style="background-image: url(/assets/images/background/12.jpg)">
+    <div class="auto-container">
+        <h1>Recursos</h1>
+        <ul class="page-breadcrumb">
+            <li><a href="index.html">Inicio</a></li>
+            <li>Recursos</li>
+        </ul>
+    </div>
+</section>
+<!-- End Page Title -->
+<section class="style-two">
+    <div class="auto-container">
+        <div class="lower-content">
+            <h2 class="title-header"><span class="download-icon download fa fa-download secondary-color"></span>Sección
+                para descargar
+                fichas técnicas</h3>
+
+        </div>
+        <div class="row" id="resources-container">
+            <div class="col-md-4">
+                <div class="widget-content">
+                    <div class="sidebar-title">
+                        <h3>ARKO PANEL :</h3>
+                    </div>
+                    <div class="text">Explicacion de que es lo que contiene esta ficha técnica y para que le puede
+                        servir al usuario.</div>
+                    <!-- Broucher Box -->
+                    <div class="broucher-box">
+                        <a href="#" class="overlay-link"></a>
+                        <div class="broucher-inner">
+                            <span class="download-icon download fa fa-download"></span>
+                            Descargar
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="widget-content">
+                    <div class="sidebar-title">
+                        <h3>ARKO PANEL :</h3>
+                    </div>
+                    <div class="text">Explicacion de que es lo que contiene esta ficha técnica y para que le puede
+                        servir al usuario.</div>
+                    <!-- Broucher Box -->
+                    <div class="broucher-box">
+                        <a href="#" class="overlay-link"></a>
+                        <div class="broucher-inner">
+                            <span class="download-icon download fa fa-download"></span>
+                            Descargar
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="widget-content">
+                    <div class="sidebar-title">
+                        <h3>ARKO PANEL :</h3>
+                    </div>
+                    <div class="text">Explicacion de que es lo que contiene esta ficha técnica y para que le puede
+                        servir al usuario.</div>
+                    <!-- Broucher Box -->
+                    <div class="broucher-box">
+                        <a href="#" class="overlay-link"></a>
+                        <div class="broucher-inner">
+                            <span class="download-icon download fa fa-download"></span>
+                            Descargar
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+</section>
+<script>
+    class RecursosApp {
+        constructor() {
+            this.$recursosContenedor = document.querySelector('#resources-container');
+        }
+        async getRecursos() {
+            let response = await fetch("http://localhost:8000/api/recursos/");
+            if (response.ok) {
+                return await response.json()
+            } else {
+                alert("HTTP-Error: " + response.status);
+                return response.status;
+            }
+        }
+
+        renderRecursos(listadoRecursos) {
+            console.log(listadoRecursos)
+            console.log('RENDER RECURSOS');
+            this.$recursosContenedor.innerHTML = listadoRecursos.map(function (recurso) {
+                return `    <div class="col-md-4">
+                <div class="widget-content">
+                    <div class="sidebar-title">
+                        <h3>${recurso.titulo} :</h3>
+                    </div>
+                    <div class="text">${recurso.descripcion}</div>
+                    <!-- Broucher Box -->
+                    <div class="broucher-box">
+                        <a href="${recurso.archivo}" target="__blank"class="overlay-link"></a>
+                        <div class="broucher-inner">
+                            <span class="download-icon download fa fa-download"></span>
+                            Descargar
+                        </div>
+                    </div>
+
+                </div>
+            </div>`
+            });
+        }
+    }
+
+    const app = new RecursosApp();
+    app.getRecursos()
+        .then(function (recursos) {
+            app.renderRecursos(recursos);
+        }).catch(function (error) {
+            alert(error);
+            console.error(error)
+        });
+
+</script>
             <!-- Main Footer -->
             <footer class="main-footer">
                 <div class="pattern-layer-one" style="background-image: url(images/background/pattern-6.png)"></div>
