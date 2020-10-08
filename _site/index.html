@@ -183,7 +183,7 @@
 <section class="main-slider">
 	<div class="main-slider-carousel owl-carousel owl-theme">
 
-		<div class="slide" style="background-image:url(images/main-slider/image-1.jpg)">
+		<div class="slide" id="main-slider" style="background-image:url(images/main-slider/image-1.jpg)">
 			<div class="color-layer"></div>
 			<div class="circle-icon" style="background-image:url(images/main-slider/icon-1.png)"></div>
 			<div class="auto-container">
@@ -227,8 +227,9 @@
 					<div class="icon-box">
 						<div class="icon flaticon-buildings"></div>
 					</div>
-					<h4><a href="services-single.html">Servicios 1</a></h4>
-					<div class="text">Nunc aliquet nulla nec dapibus max imus. Nam aliquam neque.</div>
+					<h4><a href="services-single.html" id="titulo-servicio1">Servicios 1</a></h4>
+					<div class="text" id="descripcion-servicio1">Nunc aliquet nulla nec dapibus max imus. Nam aliquam
+						neque.</div>
 					<a class="read-more" href="services-single.html">Leer más <span
 							class="arrow fa fa-angle-double-right"></span></a>
 				</div>
@@ -242,8 +243,9 @@
 					<div class="icon-box">
 						<div class="icon flaticon-laser-cutting-machine"></div>
 					</div>
-					<h4><a href="services-single.html">Servicio 2</a></h4>
-					<div class="text">Nunc aliquet nulla nec dapibus max imus. Nam aliquam neque.</div>
+					<h4><a href="services-single.html" id="titulo-servicio2">Servicio 2</a></h4>
+					<div class="text" id="descripcion-servicio2">Nunc aliquet nulla nec dapibus max imus. Nam aliquam
+						neque.</div>
 					<a class="read-more" href="services-single.html">Leer más <span
 							class="arrow fa fa-angle-double-right"></span></a>
 				</div>
@@ -257,8 +259,9 @@
 					<div class="icon-box">
 						<div class="icon flaticon-construction"></div>
 					</div>
-					<h4><a href="services-single.html">Servicio 3</a></h4>
-					<div class="text">Nunc aliquet nulla nec dapibus max imus. Nam aliquam neque.</div>
+					<h4><a href="services-single.html" id="titulo-servicio3">Servicio 3</a></h4>
+					<div class="text" id="descripcion-servicio3">Nunc aliquet nulla nec dapibus max imus. Nam aliquam
+						neque.</div>
 					<a class="read-more" href="services-single.html">Leer más <span
 							class="arrow fa fa-angle-double-right"></span></a>
 				</div>
@@ -351,7 +354,6 @@
 	</div>
 </section>
 <!-- End Fluid Section One -->
-
 <!-- Gallery Section -->
 <section class="gallery-section" style="background-image:url(images/background/pattern-1.png)">
 	<div class="auto-container">
@@ -367,132 +369,12 @@
 			<!--Filter-->
 			<div class="filters clearfix">
 
-				<ul class="filter-tabs filter-btns text-center clearfix">
-					<li class="active filter" data-role="button" data-filter="all"><span
-							class="icon flaticon-folder"></span>All Cases</li>
-					<li class="filter" data-role="button" data-filter=".interior"><span
-							class="icon flaticon-stair"></span>Interiors</li>
-					<li class="filter" data-role="button" data-filter=".bridge"><span
-							class="icon flaticon-golden-gate-bridge"></span>Modern Bridge</li>
-					<li class="filter" data-role="button" data-filter=".building"><span
-							class="icon flaticon-skyscraper"></span>Buildings</li>
-					<li class="filter" data-role="button" data-filter=".house"><span
-							class="icon flaticon-town"></span>Houses</li>
+				<ul class="filter-tabs filter-btns text-center clearfix" id="tabs-categorias">
 				</ul>
 
 			</div>
 
-			<div class="filter-list row clearfix">
-
-				<!-- Gallery Block -->
-				<div class="gallery-block mix house bridge col-lg-4 col-md-6 col-sm-12">
-					<div class="inner-box">
-						<div class="image">
-							<img src="/assets/images/gallery/1.jpg" alt="" />
-							<div class="overlay-box">
-								<a href="images/gallery/1.jpg" data-fancybox="case" data-caption=""
-									class="search-icon"><span class="icon flaticon-plus"></span></a>
-								<div class="content">
-									<div class="category">Commercial</div>
-									<h4><a href="portfolio-single.html">Mechanical Trim</a></h4>
-									<a href="portfolio-single.html" class="read-more theme-btn">Leer más</a>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-
-				<!-- Gallery Block -->
-				<div class="gallery-block mix interior col-lg-4 col-md-6 col-sm-12">
-					<div class="inner-box">
-						<div class="image">
-							<img src="/assets/images/gallery/2.jpg" alt="" />
-							<div class="overlay-box">
-								<a href="images/gallery/2.jpg" data-fancybox="case" data-caption=""
-									class="search-icon"><span class="icon flaticon-plus"></span></a>
-								<div class="content">
-									<div class="category">Commercial</div>
-									<h4><a href="portfolio-single.html">Mechanical Trim</a></h4>
-									<a href="portfolio-single.html" class="read-more theme-btn">Leer más</a>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-
-				<!-- Gallery Block -->
-				<div class="gallery-block mix building interior col-lg-4 col-md-6 col-sm-12">
-					<div class="inner-box">
-						<div class="image">
-							<img src="/assets/images/gallery/3.jpg" alt="" />
-							<div class="overlay-box">
-								<a href="images/gallery/3.jpg" data-fancybox="case" data-caption=""
-									class="search-icon"><span class="icon flaticon-plus"></span></a>
-								<div class="content">
-									<div class="category">Commercial</div>
-									<h4><a href="portfolio-single.html">Mechanical Trim</a></h4>
-									<a href="portfolio-single.html" class="read-more theme-btn">Leer más</a>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-
-				<!-- Gallery Block -->
-				<div class="gallery-block mix house interior col-lg-4 col-md-6 col-sm-12">
-					<div class="inner-box">
-						<div class="image">
-							<img src="/assets/images/gallery/4.jpg" alt="" />
-							<div class="overlay-box">
-								<a href="images/gallery/4.jpg" data-fancybox="case" data-caption=""
-									class="search-icon"><span class="icon flaticon-plus"></span></a>
-								<div class="content">
-									<div class="category">Commercial</div>
-									<h4><a href="portfolio-single.html">Mechanical Trim</a></h4>
-									<a href="portfolio-single.html" class="read-more theme-btn">Leer más</a>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-
-				<!-- Gallery Block -->
-				<div class="gallery-block mix house building col-lg-4 col-md-6 col-sm-12">
-					<div class="inner-box">
-						<div class="image">
-							<img src="/assets/images/gallery/5.jpg" alt="" />
-							<div class="overlay-box">
-								<a href="images/gallery/5.jpg" data-fancybox="case" data-caption=""
-									class="search-icon"><span class="icon flaticon-plus"></span></a>
-								<div class="content">
-									<div class="category">Commercial</div>
-									<h4><a href="portfolio-single.html">Mechanical Trim</a></h4>
-									<a href="portfolio-single.html" class="read-more theme-btn">Leer más</a>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-
-				<!-- Gallery Block -->
-				<div class="gallery-block mix house bridge interior building col-lg-4 col-md-6 col-sm-12">
-					<div class="inner-box">
-						<div class="image">
-							<img src="/assets/images/gallery/6.jpg" alt="" />
-							<div class="overlay-box">
-								<a href="images/gallery/6.jpg" data-fancybox="case" data-caption=""
-									class="search-icon"><span class="icon flaticon-plus"></span></a>
-								<div class="content">
-									<div class="category">Commercial</div>
-									<h4><a href="portfolio-single.html">Mechanical Trim</a></h4>
-									<a href="portfolio-single.html" class="read-more theme-btn">Leer más</a>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-
-			</div>
+			<div class="filter-list row clearfix" id="details-categoria"></div>
 		</div>
 
 		<div class="lower-text text-center">
@@ -502,7 +384,6 @@
 
 	</div>
 </section>
-
 <!-- Testimonial Section -->
 <section class="testimonial-section" style="background-image:url(images/background/3.jpg)">
 	<div class="auto-container">
@@ -512,93 +393,7 @@
 			<div class="title">Testimonios</div>
 			<h2>Que dicen los clientes <br> Sobre nosotros</h2>
 		</div>
-		<div class="testimonial-carousel owl-carousel owl-theme">
-
-			<!-- Testimonial Block -->
-			<div class="testimonial-block">
-				<div class="inner-box">
-					<div class="content">
-						<div class="upper-box">
-							<div class="upper-inner">
-								<div class="author-image">
-									<img src="/assets/images/resource/author-1.jpg" alt="" />
-								</div>
-								<h4>Emily Bulnts</h4>
-								<div class="designation">Manager Effiect</div>
-							</div>
-						</div>
-						<div class="text">Yet those that embrace change are thriving, building bigger better,
-							faster, and stronger products than ever before. You are helping to lead the charge
-							we can help you build on your past and prepare future.</div>
-					</div>
-					<div class="quote-icon flaticon-quote"></div>
-				</div>
-			</div>
-
-			<!-- Testimonial Block -->
-			<div class="testimonial-block">
-				<div class="inner-box">
-					<div class="content">
-						<div class="upper-box">
-							<div class="upper-inner">
-								<div class="author-image">
-									<img src="/assets/images/resource/author-2.jpg" alt="" />
-								</div>
-								<h4>Noyan Rider</h4>
-								<div class="designation">CEO Factory</div>
-							</div>
-						</div>
-						<div class="text">Yet those that embrace change are thriving, building bigger better,
-							faster, and stronger products than ever before. You are helping to lead the charge
-							we can help you build on your past and prepare future.</div>
-					</div>
-					<div class="quote-icon flaticon-quote"></div>
-				</div>
-			</div>
-
-			<!-- Testimonial Block -->
-			<div class="testimonial-block">
-				<div class="inner-box">
-					<div class="content">
-						<div class="upper-box">
-							<div class="upper-inner">
-								<div class="author-image">
-									<img src="/assets/images/resource/author-1.jpg" alt="" />
-								</div>
-								<h4>Emily Bulnts</h4>
-								<div class="designation">Manager Effiect</div>
-							</div>
-						</div>
-						<div class="text">Yet those that embrace change are thriving, building bigger better,
-							faster, and stronger products than ever before. You are helping to lead the charge
-							we can help you build on your past and prepare future.</div>
-					</div>
-					<div class="quote-icon flaticon-quote"></div>
-				</div>
-			</div>
-
-			<!-- Testimonial Block -->
-			<div class="testimonial-block">
-				<div class="inner-box">
-					<div class="content">
-						<div class="upper-box">
-							<div class="upper-inner">
-								<div class="author-image">
-									<img src="/assets/images/resource/author-2.jpg" alt="" />
-								</div>
-								<h4>Noyan Rider</h4>
-								<div class="designation">CEO Factory</div>
-							</div>
-						</div>
-						<div class="text">Yet those that embrace change are thriving, building bigger better,
-							faster, and stronger products than ever before. You are helping to lead the charge
-							we can help you build on your past and prepare future.</div>
-					</div>
-					<div class="quote-icon flaticon-quote"></div>
-				</div>
-			</div>
-
-		</div>
+		<div class="testimonial-carousel owl-carousel owl-theme" id="contenedor-testimonios"></div>
 	</div>
 </section>
 <!-- End Testimonial Section -->
@@ -662,6 +457,106 @@
 	</div>
 </section>
 <!-- End Clients Section -->
+
+<script>
+	class App {
+		constructor() {
+			this.$mainImageSlider = document.getElementById('main-slider');
+			this.$tituloServicio1 = document.getElementById('titulo-servicio1');
+			this.$tituloServicio2 = document.getElementById('titulo-servicio2');
+			this.$tituloServicio3 = document.getElementById('titulo-servicio3');
+			this.$descripcionServicio1 = document.getElementById('descripcion-servicio1');
+			this.$descripcionServicio2 = document.getElementById('descripcion-servicio2');
+			this.$descripcionServicio3 = document.getElementById('descripcion-servicio3');
+			this.$tabsCategorias = document.getElementById('tabs-categorias');
+			this.$detailsCategorias = document.getElementById('details-categoria');
+			this.$testimonios = document.getElementById('contenedor-testimonios');
+		}
+		async getData() {
+			let responseInicio = await fetch("http://localhost:8000/api/inicio/");
+			let responseCategorias = await fetch("http://localhost:8000/api/inicio-categorias/");
+			let responseImagenesCategorias = await fetch("http://localhost:8000/api/inicio-imagenes-categoria/");
+			let responseTestimonios = await fetch("http://localhost:8000/api/inicio-comentarios-cliente/");
+			if (responseInicio.ok && responseCategorias.ok && responseImagenesCategorias.ok) {
+				return {
+					inicio: await responseInicio.json(),
+					categorias: await responseCategorias.json(),
+					imagenesCategoria: await responseImagenesCategorias.json(),
+					testimonios: await responseTestimonios.json()
+				}
+			} else {
+				alert("HTTP-Error: " + responseInicio.status);
+				return responseInicio.status;
+			}
+		}
+
+		renderData(data) {
+			console.log(data)
+			this.$mainImageSlider.style.backgroundImage = `url('${data.inicio[0].imagen_slider}')`;
+			this.$tituloServicio1.innerText = data.inicio[0].nombre_primer_servicio;
+			this.$tituloServicio2.innerText = data.inicio[0].nombre_segundo_servicio;
+			this.$tituloServicio3.innerText = data.inicio[0].nombre_tercer_servicio;
+			this.$descripcionServicio1.innerText = data.inicio[0].descripcion_tercer_servicio;
+			this.$descripcionServicio2.innerText = data.inicio[0].descripcion_segundo_servicio;
+			this.$descripcionServicio3.innerText = data.inicio[0].descripcion_tercer_servicio;
+
+			let categoriasListado = data.categorias.map(function (categoria) {
+				return `<li class="filter" data-role="button" data-filter=".${categoria.nombre}"><span
+							class="icon flaticon-stair"></span>${categoria.nombre}</li>`
+			});
+
+			categoriasListado.push(`<li class="active filter" data-role="button" data-filter="all"><span
+					class="icon flaticon-folder"></span>Todos</li>`);
+
+			this.$tabsCategorias.innerHTML = categoriasListado;
+			this.$detailsCategorias.innerHTML = data.imagenesCategoria.map(function (detalleCategoria) {
+				return `<div class="gallery-block mix ${detalleCategoria.categoria.nombre} col-lg-4 col-md-6 col-sm-12" style="display: inline-block;">
+					<div class="inner-box">
+						<div class="image">
+							<img src="${detalleCategoria.imagen}" alt="" />
+							<div class="overlay-box">
+								<a href="${detalleCategoria.imagen}" data-fancybox="case" data-caption=""
+									class="search-icon"><span class="icon flaticon-plus"></span></a>
+								<div class="content">
+									<div class="category">Commercial</div>
+									<h4><a href="portfolio-single.html">${detalleCategoria.nombre}</a></h4>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>`
+			})
+			this.$testimonios.innerHTML = data.testimonios.map(function (testimonio) {
+				return `<div class="testimonial-block">
+				<div class="inner-box">
+					<div class="content">
+						<div class="upper-box">
+							<div class="upper-inner">
+								<div class="author-image">
+									<img src="${testimonio.imagen}" alt="" />
+								</div>
+								<h4>${testimonio.nombre}</h4>
+							</div>
+						</div>
+						<div class="text">${testimonio.comentario}</div>
+					</div>
+					<div class="quote-icon flaticon-quote"></div>
+				</div>
+			</div>`
+			})
+		}
+	}
+	(async function () {
+		const app = new App();
+		const data = await app.getData()
+		await app.renderData(data);
+		if ($('.filter-list').length) {
+
+			$('.filter-list').mixItUp({});
+		}
+
+	})();
+</script>
             <!-- Main Footer -->
             <footer class="main-footer">
                 <div class="pattern-layer-one" style="background-image: url(images/background/pattern-6.png)"></div>

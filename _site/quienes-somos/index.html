@@ -252,16 +252,11 @@
             });
         }
     }
-
-    const app = new App();
-    app.getData()
-        .then(function (data) {
-            app.renderData(data);
-        }).catch(function (error) {
-            alert(error);
-            console.error(error)
-        });
-
+    (async function () {
+        const app = new App();
+        const data = await app.getData()
+        app.renderData(data);
+    })();
 </script>
             <!-- Main Footer -->
             <footer class="main-footer">
