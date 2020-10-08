@@ -97,8 +97,8 @@ layout: "base.njk"
                                 <div class="icon flaticon-call-3"></div>
                                 <ul>
                                     <li><strong>Llámanos</strong></li>
-                                    <li>Phone : +145 (03) 456 0000</li>
-                                    <li>Support : +145 (03) 456 0000</li>
+                                    <li id="telefono-principal"></li>
+                                    <li id="telefono-secundario"></li>
                                 </ul>
                             </div>
                         </div>
@@ -109,7 +109,7 @@ layout: "base.njk"
                                 <div class="icon flaticon-email-3"></div>
                                 <ul>
                                     <li><strong>Escríbenos</strong></li>
-                                    <li>name@yourmail.com</li>
+                                    <li id="email"></li>
                                 </ul>
                             </div>
                         </div>
@@ -120,8 +120,7 @@ layout: "base.njk"
                                 <div class="icon flaticon-time"></div>
                                 <ul>
                                     <li><strong>Horarios</strong></li>
-                                    <li>Monday - Satureday</li>
-                                    <li>9:00 am to 5pm</li>
+                                    <li id="horario"></li>
                                 </ul>
                             </div>
                         </div>
@@ -131,8 +130,8 @@ layout: "base.njk"
                             <div class="inner">
                                 <div class="icon flaticon-placeholder"></div>
                                 <ul>
-                                    <li><strong>Address</strong></li>
-                                    <li>Themeforest, Envanto HQ 24 Fifth st, Los Angeles, USA</li>
+                                    <li><strong>Dirección</strong></li>
+                                    <li id="direccion"></li>
                                 </ul>
                             </div>
                         </div>
@@ -145,3 +144,37 @@ layout: "base.njk"
     </div>
 </section>
 <!-- End Contact Info Section -->
+<script>
+    class App {
+        constructor() {
+            this.$telefono = document.getElementById('telefono-principal');
+            this.$telefonoSecundario = document.getElementById('telefono-secundario');
+            this.$email = document.getElementById('email');
+            this.$horario = document.getElementById('horario');
+            this.$direccion = document.getElementById('direccion');
+        }
+        async getData() {
+            let response = await fetch("http://localhost:8000/api/contacto/");
+            if (response.ok) {
+                return await response.json()
+            } else {
+                alert("HTTP-Error: " + response.status);
+                return response.status;
+            }
+        }
+
+        renderData(data) {
+            console.log(data)
+            this.$telefono.innerText = data[0].telefono;
+            this.$telefonoSecundario.innerText = data[0].telefono_adicional;
+            this.$email.innerText = data[0].email;
+            this.$horario.innerText = data[0].horario;
+            this.$direccion.innerText = `${data[0].calle} ${data[0].numero_exterior}, ${data[0].municipio}, ${data[0].estado}, ${data[0].pais}, ${data[0].codigo_postal}`
+        }
+    }
+    (async function () {
+        const app = new App();
+        const data = await app.getData()
+        app.renderData(data);
+    })();
+</script>

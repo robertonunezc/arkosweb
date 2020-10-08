@@ -371,9 +371,10 @@ layout: "base.njk"
 	(async function () {
 		const app = new App();
 		const data = await app.getData()
+		
 		await app.renderData(data);
-		if ($('.filter-list').length) {
 
+		if ($('.filter-list').length) {
 			$('.filter-list').mixItUp({});
 		}
 
