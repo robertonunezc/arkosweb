@@ -22,30 +22,7 @@ layout: "base.njk"
                     <div class="inner-box">
                         <div class="lower-content">
                             <h2><span class="icon flaticon-buildings"></span> Sistema Constructivo ARKOS</h2>
-                            <p>Donec scelerisque dolor id nunc dictum, interdum gravida mauris rhoncus. Aliquam at
-                                ultrices nunc. In sem leo, fermentum at lorem in, porta finibus mauris. Aliquam
-                                consectetur, ex in gravida porttitor,</p>
-                            <p>Donec scelerisque dolor id nunc dictum, interdum gravida mauris rhoncus. Aliquam at
-                                ultrices nunc. In sem leo, fermentum at lorem in, porta finibus mauris. Aliquam
-                                consectetur, ex in gravida porttitor, Lorem Ipsum is simply dummy text of the printing
-                                and typesetting industry. Lorem Ipsum has been the industry's standard make a type
-                                specimen book. It has survived not only.</p>
-                            <div class="row clearfix">
-                                <div class="column col-lg-6 col-md-12 col-sm-12">
-                                    <ul class="list-style-three">
-                                        <li>Sed do eiusmod tempor incididunt ut</li>
-                                        <li>Labore et dolore magna aliqua</li>
-                                        <li>Ut enim ad minim veniam quis nostrud</li>
-                                    </ul>
-                                </div>
-                                <div class="column col-lg-6 col-md-12 col-sm-12">
-                                    <ul class="list-style-three">
-                                        <li>Sed do eiusmod tempor incididunt ut</li>
-                                        <li>Labore et dolore magna aliqua</li>
-                                        <li>Ut enim ad minim veniam quis nostrud</li>
-                                    </ul>
-                                </div>
-                            </div>
+                            <p id="sistema-descripcion"></p>
 
                             <!-- Service Info Tabs -->
                             <div class="service-info-tabs">
@@ -53,39 +30,11 @@ layout: "base.njk"
                                 <div class="service-tabs tabs-box">
 
                                     <!--Tab Btns-->
-                                    <ul class="tab-btns tab-buttons clearfix">
-                                        <li data-tab="#prod-care" class="tab-btn active-btn">Beneficios Generales</li>
-                                        <li data-tab="#prod-support" class="tab-btn">Beneficios Media Ambiente</li>
+                                    <ul class="tab-btns tab-buttons clearfix" id="tab-beneficios">
                                     </ul>
 
                                     <!--Tabs Container-->
-                                    <div class="tabs-content">
-
-                                        <!-- Tab / Active Tab -->
-                                        <div class="tab active-tab" id="prod-care">
-                                            <div class="content">
-                                                <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem
-                                                    accusantium doloremque lau dantium, totam rem aperiam, eaque ipsa
-                                                    quae ab illo inventore veritatis et quasi archi tecto beatae vitae
-                                                    dicta sunt explicabo.</p>
-                                                <p>Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut
-                                                    fugit, sed quia conse quuntur magni dolores eos qui ratione
-                                                    voluptatem sequi nesciunt.</p>
-                                            </div>
-                                        </div>
-
-                                        <!-- Tab -->
-                                        <div class="tab" id="prod-support">
-                                            <div class="content">
-                                                <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem
-                                                    accusantium doloremque lau dantium, totam rem aperiam, eaque ipsa
-                                                    quae ab illo inventore veritatis et quasi archi tecto beatae vitae
-                                                    dicta sunt explicabo.</p>
-                                                <p>Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut
-                                                    fugit, sed quia conse quuntur magni dolores eos qui ratione
-                                                    voluptatem sequi nesciunt.</p>
-                                            </div>
-                                        </div>
+                                    <div class="tabs-content" id="tab-contenido">
                                     </div>
                                 </div>
                             </div>
@@ -99,80 +48,72 @@ layout: "base.njk"
     </div>
 </div>
 
-<!-- Clients Section Three -->
-<section class="clients-section-three style-two" style="background-image:url(images/background/pattern-21.png)">
-    <div class="auto-container">
-        <div class="row clearfix">
 
-            <!-- Title Column -->
-            <div class="title-column col-lg-5 col-md-12 col-sm-12">
-                <div class="inner-column">
-                    <div class="title-box">
-                        <div class="title">
-                            <span class="separater"></span>
-                            Get Quote
-                        </div>
-                        <h3>Request A Quote</h3>
-                        <div class="text">At vero eos et accusamus et iusto odio digni goiku ssimos <br> ducimus qui
-                            blanditiis praese.</div>
-                    </div>
-                    <a href="contact.html" class="read-more">Contact Now <span
-                            class="plus-box flaticon-plus-symbol"></span></a>
-                </div>
-            </div>
+<script>
+    class App {
+        constructor() {
+            this.$sistemaDescripcion = document.getElementById('sistema-descripcion');
+            this.$tabBeneficios = document.getElementById('tab-beneficios');
+            this.$tabContenidoBeneficio = document.getElementById('tab-contenido');
 
-            <!-- Clients Column -->
-            <div class="clients-column col-lg-7 col-md-12 col-sm-12">
-                <div class="inner-column">
-                    <div class="row clearfix">
+        }
+        async getData() {
+            let responseSistema = await fetch("http://localhost:8000/api/sistema/");
+            let responseBeneficios = await fetch("http://localhost:8000/api/beneficios-sistema/");
+            if (responseSistema.ok && responseBeneficios.ok) {
+                const response = {
+                    sistema: await responseSistema.json(),
+                    beneficios: await responseBeneficios.json()
+                }
+                return response;
+            } else {
+                alert("HTTP-Error: " + responseSistema.status);
+                return responseSistema.status;
+            }
+        }
 
-                        <!-- Client Box -->
-                        <div class="client-box col-lg-4 col-md-4 col-sm-12">
-                            <div class="image">
-                                <a href="#"><img src="images/clients/9.png" alt="" /></a>
-                            </div>
-                        </div>
+        async renderData(data) {
+            console.log(data)
+            this.$sistemaDescripcion.innerHTML = data.sistema.map(function (item) {
+                return `<p>${item.descripcion}</p>`
+            });
+            this.$tabBeneficios.innerHTML = data.beneficios.map(function (beneficio) {
+                return `<li data-tab="#${beneficio.titulo.toLowerCase().trim()}" class="tab-btn">${beneficio.titulo}</li>`
+            });
 
-                        <!-- Client Box -->
-                        <div class="client-box col-lg-4 col-md-4 col-sm-12">
-                            <div class="image">
-                                <a href="#"><img src="images/clients/10.png" alt="" /></a>
-                            </div>
-                        </div>
+            this.$tabContenidoBeneficio.innerHTML = data.beneficios.map(function (beneficio) {
+                return `<div class="tab" id="${beneficio.titulo.toLowerCase().trim()}">
+                                            <div class="content">
+                                                <p>${beneficio.descripcion}</p>
+                                              
+                                            </div>
+                                        </div>`
+            });
+        }
+    }
+    (async function () {
+        const app = new App();
+        const data = await app.getData()
+        await app.renderData(data);
 
-                        <!-- Client Box -->
-                        <div class="client-box col-lg-4 col-md-4 col-sm-12">
-                            <div class="image">
-                                <a href="#"><img src="images/clients/11.png" alt="" /></a>
-                            </div>
-                        </div>
+        //Tabs Box
+        if ($('.tabs-box').length) {
+            $('.tabs-box .tab-buttons .tab-btn').on('click', function (e) {
+                e.preventDefault();
+                var target = $($(this).attr('data-tab'));
 
-                        <!-- Client Box -->
-                        <div class="client-box col-lg-4 col-md-4 col-sm-12">
-                            <div class="image">
-                                <a href="#"><img src="images/clients/12.png" alt="" /></a>
-                            </div>
-                        </div>
+                if ($(target).is(':visible')) {
+                    return false;
+                } else {
+                    target.parents('.tabs-box').find('.tab-buttons').find('.tab-btn').removeClass('active-btn');
+                    $(this).addClass('active-btn');
+                    target.parents('.tabs-box').find('.tabs-content').find('.tab').fadeOut(0);
+                    target.parents('.tabs-box').find('.tabs-content').find('.tab').removeClass('active-tab');
+                    $(target).fadeIn(300);
+                    $(target).addClass('active-tab');
+                }
+            });
+        }
 
-                        <!-- Client Box -->
-                        <div class="client-box col-lg-4 col-md-4 col-sm-12">
-                            <div class="image">
-                                <a href="#"><img src="images/clients/13.png" alt="" /></a>
-                            </div>
-                        </div>
-
-                        <!-- Client Box -->
-                        <div class="client-box col-lg-4 col-md-4 col-sm-12">
-                            <div class="image">
-                                <a href="#"><img src="images/clients/14.png" alt="" /></a>
-                            </div>
-                        </div>
-
-                    </div>
-                </div>
-            </div>
-
-        </div>
-    </div>
-</section>
-<!-- End Clients Section Three -->
+    })();
+</script>
