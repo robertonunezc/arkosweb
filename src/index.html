@@ -323,7 +323,7 @@ layout: "base.njk"
 			this.$descripcionServicio3.innerText = data.inicio[0].descripcion_tercer_servicio;
 
 			let categoriasListado = data.categorias.map(function (categoria) {
-				return `<li class="filter" data-role="button" data-filter=".${categoria.nombre}"><span
+				return `<li class="filter" data-role="button" data-filter=".${categoria.nombre.toLowerCase().replace(/ /g, '')}"><span
 							class="icon flaticon-stair"></span>${categoria.nombre}</li>`
 			});
 
@@ -332,7 +332,7 @@ layout: "base.njk"
 
 			this.$tabsCategorias.innerHTML = categoriasListado;
 			this.$detailsCategorias.innerHTML = data.imagenesCategoria.map(function (detalleCategoria) {
-				return `<div class="gallery-block mix ${detalleCategoria.categoria.nombre} col-lg-4 col-md-6 col-sm-12" style="display: inline-block;">
+				return `<div class="gallery-block mix ${detalleCategoria.categoria.nombre.toLowerCase().replace(/ /g, '')} col-lg-4 col-md-6 col-sm-12" style="display: inline-block;">
 					<div class="inner-box">
 						<div class="image">
 							<img src="${detalleCategoria.imagen}" alt="" />
@@ -371,7 +371,7 @@ layout: "base.njk"
 	(async function () {
 		const app = new App();
 		const data = await app.getData()
-		
+
 		await app.renderData(data);
 
 		if ($('.filter-list').length) {

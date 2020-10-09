@@ -256,11 +256,11 @@
                 return `<p>${item.descripcion}</p>`
             });
             this.$tabBeneficios.innerHTML = data.beneficios.map(function (beneficio) {
-                return `<li data-tab="#${beneficio.titulo.toLowerCase().trim()}" class="tab-btn">${beneficio.titulo}</li>`
+                return `<li data-tab="#${beneficio.titulo.toLowerCase().replace(/ /g, '')}" class="tab-btn">${beneficio.titulo}</li>`
             });
 
             this.$tabContenidoBeneficio.innerHTML = data.beneficios.map(function (beneficio) {
-                return `<div class="tab" id="${beneficio.titulo.toLowerCase().trim()}">
+                return `<div class="tab" id="${beneficio.titulo.toLowerCase().replace(/ /g, '')}">
                                             <div class="content">
                                                 <p>${beneficio.descripcion}</p>
                                               

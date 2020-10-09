@@ -842,78 +842,6 @@
 	}
 
 
-
-
-
-
-	function sortableMasonry() {
-		if ($('.sortable-masonry').length) {
-
-			var winDow = $(window);
-			// Needed variables
-			var $container = $('.sortable-masonry .items-container');
-			var $filter = $('.filter-btns');
-
-			$container.isotope({
-				filter: '*',
-				masonry: {
-					columnWidth: '.masonry-item.col-lg-4'
-				},
-				animationOptions: {
-					duration: 500,
-					easing: 'linear'
-				}
-			});
-			// Isotope Filter 
-			$filter.find('li').on('click', function () {
-				var selector = $(this).attr('data-filter');
-
-				try {
-					$container.isotope({
-						filter: selector,
-						animationOptions: {
-							duration: 500,
-							easing: 'linear',
-							queue: false
-						}
-					});
-				} catch (err) {
-
-				}
-				return false;
-			});
-
-
-			winDow.bind('resize', function () {
-				var selector = $filter.find('li.active').attr('data-filter');
-
-				$container.isotope({
-					filter: selector,
-					animationOptions: {
-						duration: 500,
-						easing: 'linear',
-						queue: false
-					}
-				});
-			});
-
-
-			var filterItemA = $('.filter-btns li');
-
-			filterItemA.on('click', function () {
-				var $this = $(this);
-				if (!$this.hasClass('active')) {
-					filterItemA.removeClass('active');
-					$this.addClass('active');
-				}
-			});
-		}
-	}
-	sortableMasonry();
-
-
-
-
 	//LightBox / Fancybox
 	if ($('.lightbox-image').length) {
 		$('.lightbox-image').fancybox({
@@ -1000,7 +928,6 @@
 
 	$(window).on('load', function () {
 		handlePreloader();
-		sortableMasonry();
 	});
 
 })(window.jQuery);
