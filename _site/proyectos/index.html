@@ -126,19 +126,8 @@
                                             <a href="/sistema/">Sistema ARKOS</a>
                                         </li>
 
-                                        <li class="dropdown">
-                                            <a href="#">Aplicaciones</a>
-                                            <ul>
-                                                <li>
-                                                    <a href="blog.html">Construcción</a>
-                                                </li>
-                                                <li>
-                                                    <a href="blog-classic.html">Mueblería</a>
-                                                </li>
-                                                <li>
-                                                    <a href="news-detail.html">Recubrimientos</a>
-                                                </li>
-                                            </ul>
+                                        <li>
+                                            <a href="/aplicaciones/">Aplicaciones</a>
                                         </li>
                                         <li class="">
                                             <a href="/recursos/">Recursos</a>
@@ -228,8 +217,13 @@
         }
         async getData() {
             let response = await fetch("http://localhost:8000/api/proyectos/");
+            let responseCategorias = await fetch("http://localhost:8000/api/proyectos-categorias/");
+
             if (response.ok) {
-                return await response.json()
+                return {
+                    proyectos: await response.json(),
+                    categorias: await responseCategorias.json()
+                }
             } else {
                 alert("HTTP-Error: " + response.status);
                 return response.status;
@@ -238,10 +232,9 @@
 
         async renderData(data) {
             console.log(data)
-            let categoriasListado = data.map(function (proyecto) {
-                const categoria = proyecto.categoria;
-                return `<li class="filter" data-role="button" data-filter=".${proyecto.categoria.toLowerCase().replace(/ /g, '')}"><span
-							class="icon flaticon-stair"></span>${proyecto.categoria}</li>`
+            let categoriasListado = data.categorias.map(function (categoria) {
+                return `<li class="filter" data-role="button" data-filter=".${categoria.nombre.toLowerCase().replace(/ /g, '')}"><span
+							class="icon flaticon-stair"></span>${categoria.nombre}</li>`
             });
 
             categoriasListado.push(`<li class="active filter" data-role="button" data-filter=".all"><span
@@ -249,17 +242,17 @@
 
             this.$tabsCategorias.innerHTML = categoriasListado;
 
-            this.$detailsCategorias.innerHTML = data.map(function (proyecto) {
-                return ` <div class="gallery-block-two masonry-item ${proyecto.categoria.toLowerCase().replace(/ /g, '')} all col-lg-4 col-md-6 col-sm-12">
+            this.$detailsCategorias.innerHTML = data.proyectos.map(function (proyecto) {
+                return ` <div class="gallery-block-two masonry-item ${proyecto.categoria.nombre.toLowerCase().replace(/ /g, '')} all col-lg-4 col-md-6 col-sm-12">
                     <div class="inner-box">
                         <div class="image">
                             <img src="${proyecto.imagen}" alt="" />
-                            <div class="tag">${proyecto.categoria}</div>
+                            <div class="tag">${proyecto.categoria.nombre}</div>
                             <div class="overlay-box">
                                 <div class="pattern-layer"></div>
                                 <div class="content">
                                     <div class="category">${proyecto.titulo}</div>
-                                    <a href="portfolio-single.html" class="read-more theme-btn">Ver más</a>
+                                    <button class="read-more theme-btn" onclick="viewDetails(${proyecto.id})">Ver más</button>
                                 </div>
                             </div>
                         </div>                       
@@ -347,6 +340,12 @@
         app.resizeContainer()
 
     })();
+    function viewDetails(proyectoId) {
+        localStorage.removeItem('proyecto-id');
+        localStorage.setItem('proyecto-id', proyectoId)
+        console.log('Open app', proyectoId)
+        window.location.href = "/detalle-proyecto/"
+    }
 </script>
             <!-- Main Footer -->
             <footer class="main-footer">
@@ -579,7 +578,6 @@
         <script src="/assets/js/isotope.js"></script>
         <script src="/assets/js/jquery-ui.js"></script>
         <script src="/assets/js/script.js"></script>
-        <script src="/assets/js/color-settings.js"></script>
 
     </body>
 

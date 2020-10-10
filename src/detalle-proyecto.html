@@ -1,0 +1,65 @@
+---
+layout: "base.njk"
+---
+<!-- Sidebar Page Container -->
+<div class="sidebar-page-container left-sidebar">
+    <div class="auto-container">
+        <div class="row clearfix">
+            <!-- Content Side -->
+            <div class="content-side col-sm-12">
+                <div class="service-detail">
+                    <div class="inner-box">
+                        <div class="lower-content">
+                            <h2 id="titulo-proyecto"><span class="icon flaticon-buildings"></span> </h2>
+                            <p id="descripcion-proyecto"></p>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="sidebar-widget gallery-widget">
+                <div class="sidebar-title-two">
+                    <h3>Imágenes</h3>
+                </div>
+                <div class="gallery-outer clearfix" id="galeria-proyecto"></div>
+            </div>
+
+        </div>
+    </div>
+</div>
+<script>
+    class App {
+        constructor() {
+            this.$tituloProyecto = document.getElementById('titulo-proyecto');
+            this.$descripcionProyecto = document.getElementById('descripcion-proyecto');
+            this.$imagenesProyecto = document.getElementById('galeria-proyecto');
+        }
+        async getData() {
+            const proyectoId = localStorage.getItem('proyecto-id');
+            let response = await fetch(`http://localhost:8000/api/proyecto/detalle/${proyectoId}`);
+            if (response.ok) {
+                return await response.json()
+            } else {
+                alert("HTTP-Error: " + response.status);
+                return response.status;
+            }
+        }
+
+        renderData(data) {
+            console.log(data)
+            this.$tituloProyecto.innerHTML = `<span class="icon flaticon-buildings"></span> ${data.titulo}`;
+            this.$descripcionProyecto.innerText = data.descripcion;
+            this.$imagenesProyecto.innerHTML = data.imagenes.map(function (imagen) {
+                return `<figure class="image">
+                        <a href="http://localhost:8000${imagen.imagen}" target="_blank"class="lightbox-image" title="${imagen.nombre}">
+                            <img src="http://localhost:8000${imagen.imagen}"  width="50" alt=""></a>
+                    </figure>`
+            });
+        }
+    }
+    (async function () {
+        const app = new App();
+        const data = await app.getData()
+        app.renderData(data);
+    })();
+</script>

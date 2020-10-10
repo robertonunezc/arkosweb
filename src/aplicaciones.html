@@ -2,12 +2,12 @@
 layout: "base.njk"
 ---
 <!-- Page Title -->
-<section class="page-title" style="background-image: url(/assets//assets/images/background/12.jpg)">
+<section class="page-title" style="background-image: url(/assets/images/background/12.jpg)">
     <div class="auto-container">
-        <h1>Proyectos </h1>
+        <h1>Aplicaciones </h1>
         <ul class="page-breadcrumb">
             <li><a href="/">Inicio</a></li>
-            <li>Proyectos</li>
+            <li>Aplicaciones</li>
         </ul>
     </div>
 </section>
@@ -18,8 +18,8 @@ layout: "base.njk"
         <!-- Sec Title -->
         <div class="sec-title style-two centered">
             <div class="separater"></div>
-            <div class="title">Proyectos desarrollados con ARKOS</div>
-            <h2>Puede ver lo que es capaz de hacer ARKOS</h2>
+            <div class="title"></div>
+            <h2>Aplicaciones desarrollados con ARKOS</h2>
         </div>
 
         <!--Isotope Galery-->
@@ -49,17 +49,17 @@ layout: "base.njk"
 
         }
         async getData() {
-            let response = await fetch("http://localhost:8000/api/proyectos/");
-            let responseCategorias = await fetch("http://localhost:8000/api/proyectos-categorias/");
+            let responseCategorias = await fetch("http://localhost:8000/api/aplicacion-categorias/");
+            let responseAplicaciones = await fetch("http://localhost:8000/api/aplicacion/");
 
-            if (response.ok) {
+            if (responseCategorias.ok && responseAplicaciones.ok) {
                 return {
-                    proyectos: await response.json(),
-                    categorias: await responseCategorias.json()
+                    categorias: await responseCategorias.json(),
+                    aplicaciones: await responseAplicaciones.json()
                 }
             } else {
-                alert("HTTP-Error: " + response.status);
-                return response.status;
+                alert("HTTP-Error: " + responseCategorias.status);
+                return responseCategorias.status;
             }
         }
 
@@ -75,17 +75,17 @@ layout: "base.njk"
 
             this.$tabsCategorias.innerHTML = categoriasListado;
 
-            this.$detailsCategorias.innerHTML = data.proyectos.map(function (proyecto) {
-                return ` <div class="gallery-block-two masonry-item ${proyecto.categoria.nombre.toLowerCase().replace(/ /g, '')} all col-lg-4 col-md-6 col-sm-12">
+            this.$detailsCategorias.innerHTML = data.aplicaciones.map(function (aplicacion) {
+                return ` <div class="gallery-block-two masonry-item ${aplicacion.categoria.nombre.toLowerCase().replace(/ /g, '')} all col-lg-4 col-md-6 col-sm-12">
                     <div class="inner-box">
                         <div class="image">
-                            <img src="${proyecto.imagen}" alt="" />
-                            <div class="tag">${proyecto.categoria.nombre}</div>
+                            <img src="${aplicacion.imagen}" alt="" />
+                            <div class="tag">${aplicacion.categoria.nombre}</div>
                             <div class="overlay-box">
                                 <div class="pattern-layer"></div>
                                 <div class="content">
-                                    <div class="category">${proyecto.titulo}</div>
-                                    <button class="read-more theme-btn" onclick="viewDetails(${proyecto.id})">Ver más</button>
+                                    <div class="category">${aplicacion.titulo}</div>
+                                    <button class="read-more theme-btn" onclick="viewDetails(${aplicacion.id})">Ver más</button>
                                 </div>
                             </div>
                         </div>                       
@@ -170,13 +170,12 @@ layout: "base.njk"
             }
         }
         sortableMasonry();
-        app.resizeContainer()
-
+        app.resizeContainer();
     })();
-    function viewDetails(proyectoId) {
-        localStorage.removeItem('proyecto-id');
-        localStorage.setItem('proyecto-id', proyectoId)
-        console.log('Open app', proyectoId)
-        window.location.href = "/detalle-proyecto/"
+    function viewDetails(aplicacionId) {
+        localStorage.removeItem('aplicacion-id');
+        localStorage.setItem('aplicacion-id', aplicacionId)
+        console.log('Open app', aplicacionId)
+        window.location.href = "/detalle-aplicacion/"
     }
 </script>

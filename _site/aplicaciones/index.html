@@ -171,131 +171,180 @@
             <!-- Page Title -->
 <section class="page-title" style="background-image: url(/assets/images/background/12.jpg)">
     <div class="auto-container">
-        <h1>Recursos</h1>
+        <h1>Aplicaciones </h1>
         <ul class="page-breadcrumb">
-            <li><a href="index.html">Inicio</a></li>
-            <li>Recursos</li>
+            <li><a href="/">Inicio</a></li>
+            <li>Aplicaciones</li>
         </ul>
     </div>
 </section>
-<!-- End Page Title -->
-<section class="style-two">
+<!-- Gallery Section Two -->
+<section class="gallery-section-two">
     <div class="auto-container">
-        <div class="lower-content">
-            <h2 class="title-header"><span class="download-icon download fa fa-download secondary-color"></span>Sección
-                para descargar
-                fichas técnicas</h3>
 
-        </div>
-        <div class="row" id="resources-container">
-            <div class="col-md-4">
-                <div class="widget-content">
-                    <div class="sidebar-title">
-                        <h3>ARKO PANEL :</h3>
-                    </div>
-                    <div class="text">Explicacion de que es lo que contiene esta ficha técnica y para que le puede
-                        servir al usuario.</div>
-                    <!-- Broucher Box -->
-                    <div class="broucher-box">
-                        <a href="#" class="overlay-link"></a>
-                        <div class="broucher-inner">
-                            <span class="download-icon download fa fa-download"></span>
-                            Descargar
-                        </div>
-                    </div>
-
-                </div>
-            </div>
-            <div class="col-md-4">
-                <div class="widget-content">
-                    <div class="sidebar-title">
-                        <h3>ARKO PANEL :</h3>
-                    </div>
-                    <div class="text">Explicacion de que es lo que contiene esta ficha técnica y para que le puede
-                        servir al usuario.</div>
-                    <!-- Broucher Box -->
-                    <div class="broucher-box">
-                        <a href="#" class="overlay-link"></a>
-                        <div class="broucher-inner">
-                            <span class="download-icon download fa fa-download"></span>
-                            Descargar
-                        </div>
-                    </div>
-
-                </div>
-            </div>
-            <div class="col-md-4">
-                <div class="widget-content">
-                    <div class="sidebar-title">
-                        <h3>ARKO PANEL :</h3>
-                    </div>
-                    <div class="text">Explicacion de que es lo que contiene esta ficha técnica y para que le puede
-                        servir al usuario.</div>
-                    <!-- Broucher Box -->
-                    <div class="broucher-box">
-                        <a href="#" class="overlay-link"></a>
-                        <div class="broucher-inner">
-                            <span class="download-icon download fa fa-download"></span>
-                            Descargar
-                        </div>
-                    </div>
-
-                </div>
-            </div>
-
+        <!-- Sec Title -->
+        <div class="sec-title style-two centered">
+            <div class="separater"></div>
+            <div class="title"></div>
+            <h2>Aplicaciones desarrollados con ARKOS</h2>
         </div>
 
+        <!--Isotope Galery-->
+        <div class="sortable-masonry">
+
+            <!--Filter-->
+            <div class="filters clearfix">
+
+                <ul class="filter-tabs filter-btns text-center clearfix" id="tabs-categorias">
+
+                </ul>
+
+            </div>
+
+            <div class="items-container row clearfix" id="details-categoria">
+
+            </div>
+        </div>
     </div>
 </section>
+<!-- End Gallery Section Two -->
 <script>
-    class RecursosApp {
+    class App {
         constructor() {
-            this.$recursosContenedor = document.querySelector('#resources-container');
+            this.$tabsCategorias = document.getElementById('tabs-categorias');
+            this.$detailsCategorias = document.getElementById('details-categoria');
+
         }
-        async getRecursos() {
-            let response = await fetch("http://localhost:8000/api/recursos/");
-            if (response.ok) {
-                return await response.json()
+        async getData() {
+            let responseCategorias = await fetch("http://localhost:8000/api/aplicacion-categorias/");
+            let responseAplicaciones = await fetch("http://localhost:8000/api/aplicacion/");
+
+            if (responseCategorias.ok && responseAplicaciones.ok) {
+                return {
+                    categorias: await responseCategorias.json(),
+                    aplicaciones: await responseAplicaciones.json()
+                }
             } else {
-                alert("HTTP-Error: " + response.status);
-                return response.status;
+                alert("HTTP-Error: " + responseCategorias.status);
+                return responseCategorias.status;
             }
         }
 
-        renderRecursos(listadoRecursos) {
-            console.log(listadoRecursos)
-            console.log('RENDER RECURSOS');
-            this.$recursosContenedor.innerHTML = listadoRecursos.map(function (recurso) {
-                return `    <div class="col-md-4">
-                <div class="widget-content">
-                    <div class="sidebar-title">
-                        <h3>${recurso.titulo} :</h3>
-                    </div>
-                    <div class="text">${recurso.descripcion}</div>
-                    <!-- Broucher Box -->
-                    <div class="broucher-box">
-                        <a href="${recurso.archivo}" target="__blank"class="overlay-link"></a>
-                        <div class="broucher-inner">
-                            <span class="download-icon download fa fa-download"></span>
-                            Descargar
-                        </div>
-                    </div>
-
-                </div>
-            </div>`
+        async renderData(data) {
+            console.log(data)
+            let categoriasListado = data.categorias.map(function (categoria) {
+                return `<li class="filter" data-role="button" data-filter=".${categoria.nombre.toLowerCase().replace(/ /g, '')}"><span
+							class="icon flaticon-stair"></span>${categoria.nombre}</li>`
             });
+
+            categoriasListado.push(`<li class="active filter" data-role="button" data-filter=".all"><span
+					class="icon flaticon-folder"></span>Todos</li>`);
+
+            this.$tabsCategorias.innerHTML = categoriasListado;
+
+            this.$detailsCategorias.innerHTML = data.aplicaciones.map(function (aplicacion) {
+                return ` <div class="gallery-block-two masonry-item ${aplicacion.categoria.nombre.toLowerCase().replace(/ /g, '')} all col-lg-4 col-md-6 col-sm-12">
+                    <div class="inner-box">
+                        <div class="image">
+                            <img src="${aplicacion.imagen}" alt="" />
+                            <div class="tag">${aplicacion.categoria.nombre}</div>
+                            <div class="overlay-box">
+                                <div class="pattern-layer"></div>
+                                <div class="content">
+                                    <div class="category">${aplicacion.titulo}</div>
+                                    <button class="read-more theme-btn" onclick="viewDetails(${aplicacion.id})">Ver más</button>
+                                </div>
+                            </div>
+                        </div>                       
+                    </div>
+                </div>
+`;
+            })
+
+
+
+        }
+        resizeContainer() {
+            this.$detailsCategorias.style.minHeight = '800px'
         }
     }
+    (async function () {
+        const app = new App();
+        const data = await app.getData()
+        await app.renderData(data);
 
-    const app = new RecursosApp();
-    app.getRecursos()
-        .then(function (recursos) {
-            app.renderRecursos(recursos);
-        }).catch(function (error) {
-            alert(error);
-            console.error(error)
-        });
+        function sortableMasonry() {
+            if ($('.sortable-masonry').length) {
 
+                var winDow = $(window);
+                // Needed variables
+                var $container = $('.sortable-masonry .items-container');
+                var $filter = $('.filter-btns');
+
+                $container.isotope({
+                    filter: '*',
+                    masonry: {
+                        columnWidth: '.masonry-item.col-lg-4'
+                    },
+                    animationOptions: {
+                        duration: 500,
+                        easing: 'linear'
+                    }
+                });
+                // Isotope Filter 
+                $filter.find('li').on('click', function () {
+                    var selector = $(this).attr('data-filter');
+
+                    try {
+                        $container.isotope({
+                            filter: selector,
+                            animationOptions: {
+                                duration: 500,
+                                easing: 'linear',
+                                queue: false
+                            }
+                        });
+                    } catch (err) {
+
+                    }
+                    return false;
+                });
+
+
+                winDow.bind('resize', function () {
+                    var selector = $filter.find('li.active').attr('data-filter');
+
+                    $container.isotope({
+                        filter: selector,
+                        animationOptions: {
+                            duration: 500,
+                            easing: 'linear',
+                            queue: false
+                        }
+                    });
+                });
+
+
+                var filterItemA = $('.filter-btns li');
+
+                filterItemA.on('click', function () {
+                    var $this = $(this);
+                    if (!$this.hasClass('active')) {
+                        filterItemA.removeClass('active');
+                        $this.addClass('active');
+                    }
+                });
+            }
+        }
+        sortableMasonry();
+        app.resizeContainer();
+    })();
+    function viewDetails(aplicacionId) {
+        localStorage.removeItem('aplicacion-id');
+        localStorage.setItem('aplicacion-id', aplicacionId)
+        console.log('Open app', aplicacionId)
+        window.location.href = "/detalle-aplicacion/"
+    }
 </script>
             <!-- Main Footer -->
             <footer class="main-footer">

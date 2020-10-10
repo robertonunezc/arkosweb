@@ -168,92 +168,42 @@
 
             </header>
             <!-- End Main Header -->
-            <!-- Page Title -->
-<section class="page-title" style="background-image: url(/assets/images/background/12.jpg)">
+            <!-- Sidebar Page Container -->
+<div class="sidebar-page-container left-sidebar">
     <div class="auto-container">
-        <h1>Recursos</h1>
-        <ul class="page-breadcrumb">
-            <li><a href="index.html">Inicio</a></li>
-            <li>Recursos</li>
-        </ul>
-    </div>
-</section>
-<!-- End Page Title -->
-<section class="style-two">
-    <div class="auto-container">
-        <div class="lower-content">
-            <h2 class="title-header"><span class="download-icon download fa fa-download secondary-color"></span>Sección
-                para descargar
-                fichas técnicas</h3>
+        <div class="row clearfix">
+            <!-- Content Side -->
+            <div class="content-side col-sm-12">
+                <div class="service-detail">
+                    <div class="inner-box">
+                        <div class="lower-content">
+                            <h2 id="titulo-proyecto"><span class="icon flaticon-buildings"></span> </h2>
+                            <p id="descripcion-proyecto"></p>
 
-        </div>
-        <div class="row" id="resources-container">
-            <div class="col-md-4">
-                <div class="widget-content">
-                    <div class="sidebar-title">
-                        <h3>ARKO PANEL :</h3>
-                    </div>
-                    <div class="text">Explicacion de que es lo que contiene esta ficha técnica y para que le puede
-                        servir al usuario.</div>
-                    <!-- Broucher Box -->
-                    <div class="broucher-box">
-                        <a href="#" class="overlay-link"></a>
-                        <div class="broucher-inner">
-                            <span class="download-icon download fa fa-download"></span>
-                            Descargar
                         </div>
                     </div>
-
                 </div>
             </div>
-            <div class="col-md-4">
-                <div class="widget-content">
-                    <div class="sidebar-title">
-                        <h3>ARKO PANEL :</h3>
-                    </div>
-                    <div class="text">Explicacion de que es lo que contiene esta ficha técnica y para que le puede
-                        servir al usuario.</div>
-                    <!-- Broucher Box -->
-                    <div class="broucher-box">
-                        <a href="#" class="overlay-link"></a>
-                        <div class="broucher-inner">
-                            <span class="download-icon download fa fa-download"></span>
-                            Descargar
-                        </div>
-                    </div>
-
+            <div class="sidebar-widget gallery-widget">
+                <div class="sidebar-title-two">
+                    <h3>Imágenes</h3>
                 </div>
-            </div>
-            <div class="col-md-4">
-                <div class="widget-content">
-                    <div class="sidebar-title">
-                        <h3>ARKO PANEL :</h3>
-                    </div>
-                    <div class="text">Explicacion de que es lo que contiene esta ficha técnica y para que le puede
-                        servir al usuario.</div>
-                    <!-- Broucher Box -->
-                    <div class="broucher-box">
-                        <a href="#" class="overlay-link"></a>
-                        <div class="broucher-inner">
-                            <span class="download-icon download fa fa-download"></span>
-                            Descargar
-                        </div>
-                    </div>
-
-                </div>
+                <div class="gallery-outer clearfix" id="galeria-proyecto"></div>
             </div>
 
         </div>
-
     </div>
-</section>
+</div>
 <script>
-    class RecursosApp {
+    class App {
         constructor() {
-            this.$recursosContenedor = document.querySelector('#resources-container');
+            this.$tituloProyecto = document.getElementById('titulo-proyecto');
+            this.$descripcionProyecto = document.getElementById('descripcion-proyecto');
+            this.$imagenesProyecto = document.getElementById('galeria-proyecto');
         }
-        async getRecursos() {
-            let response = await fetch("http://localhost:8000/api/recursos/");
+        async getData() {
+            const proyectoId = localStorage.getItem('proyecto-id');
+            let response = await fetch(`http://localhost:8000/api/proyecto/detalle/${proyectoId}`);
             if (response.ok) {
                 return await response.json()
             } else {
@@ -262,40 +212,23 @@
             }
         }
 
-        renderRecursos(listadoRecursos) {
-            console.log(listadoRecursos)
-            console.log('RENDER RECURSOS');
-            this.$recursosContenedor.innerHTML = listadoRecursos.map(function (recurso) {
-                return `    <div class="col-md-4">
-                <div class="widget-content">
-                    <div class="sidebar-title">
-                        <h3>${recurso.titulo} :</h3>
-                    </div>
-                    <div class="text">${recurso.descripcion}</div>
-                    <!-- Broucher Box -->
-                    <div class="broucher-box">
-                        <a href="${recurso.archivo}" target="__blank"class="overlay-link"></a>
-                        <div class="broucher-inner">
-                            <span class="download-icon download fa fa-download"></span>
-                            Descargar
-                        </div>
-                    </div>
-
-                </div>
-            </div>`
+        renderData(data) {
+            console.log(data)
+            this.$tituloProyecto.innerHTML = `<span class="icon flaticon-buildings"></span> ${data.titulo}`;
+            this.$descripcionProyecto.innerText = data.descripcion;
+            this.$imagenesProyecto.innerHTML = data.imagenes.map(function (imagen) {
+                return `<figure class="image">
+                        <a href="http://localhost:8000${imagen.imagen}" target="_blank"class="lightbox-image" title="${imagen.nombre}">
+                            <img src="http://localhost:8000${imagen.imagen}"  width="50" alt=""></a>
+                    </figure>`
             });
         }
     }
-
-    const app = new RecursosApp();
-    app.getRecursos()
-        .then(function (recursos) {
-            app.renderRecursos(recursos);
-        }).catch(function (error) {
-            alert(error);
-            console.error(error)
-        });
-
+    (async function () {
+        const app = new App();
+        const data = await app.getData()
+        app.renderData(data);
+    })();
 </script>
             <!-- Main Footer -->
             <footer class="main-footer">
