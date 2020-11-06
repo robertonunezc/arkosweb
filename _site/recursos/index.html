@@ -253,7 +253,7 @@
             this.$recursosContenedor = document.querySelector('#resources-container');
         }
         async getRecursos() {
-            let response = await fetch("http://localhost:8000/api/recursos/");
+            let response = await fetch("http://arkos.puntoreica.com/api/recursos/");
             if (response.ok) {
                 return await response.json()
             } else {

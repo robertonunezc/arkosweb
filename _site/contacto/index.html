@@ -321,7 +321,7 @@
             this.$direccion = document.getElementById('direccion');
         }
         async getData() {
-            let response = await fetch("http://localhost:8000/api/contacto/");
+            let response = await fetch("http://arkos.puntoreica.com/api/contacto/");
             if (response.ok) {
                 return await response.json()
             } else {

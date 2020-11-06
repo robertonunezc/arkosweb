@@ -225,7 +225,7 @@
             this.$quienesSomosContenedor = document.querySelector('#quienes-somos-description');
         }
         async getData() {
-            let response = await fetch("http://localhost:8000/api/quienes-somos/");
+            let response = await fetch("http://arkos.puntoreica.com/api/quienes-somos/");
             if (response.ok) {
                 return await response.json()
             } else {

@@ -216,8 +216,8 @@
 
         }
         async getData() {
-            let response = await fetch("http://localhost:8000/api/proyectos/");
-            let responseCategorias = await fetch("http://localhost:8000/api/proyectos-categorias/");
+            let response = await fetch("http://arkos.puntoreica.com/api/proyectos/");
+            let responseCategorias = await fetch("http://arkos.puntoreica.com/api/proyectos-categorias/");
 
             if (response.ok) {
                 return {
