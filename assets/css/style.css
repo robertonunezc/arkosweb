@@ -11037,6 +11037,9 @@ img {
     text-align: center;
     overflow: hidden;
     padding: 160px 0px 130px;
+    background-image: url(/assets/images/background/12.jpg);
+    background-size: cover;
+    background-position: center;
 }
 
 .page-title:before {
