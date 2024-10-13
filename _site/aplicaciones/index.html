@@ -216,8 +216,8 @@
 
         }
         async getData() {
-            let responseCategorias = await fetch("http://arkos.puntoreica.com/api/aplicacion-categorias/");
-            let responseAplicaciones = await fetch("http://arkos.puntoreica.com/api/aplicacion/");
+            let responseCategorias = await fetch("https://arkos.puntoreica.com/api/aplicacion-categorias/");
+            let responseAplicaciones = await fetch("https://arkos.puntoreica.com/api/aplicacion/");
 
             if (responseCategorias.ok && responseAplicaciones.ok) {
                 return {

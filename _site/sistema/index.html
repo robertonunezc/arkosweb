@@ -225,8 +225,8 @@
 
         }
         async getData() {
-            let responseSistema = await fetch("http://arkos.puntoreica.com/api/sistema/");
-            let responseBeneficios = await fetch("http://arkos.puntoreica.com/api/beneficios-sistema/");
+            let responseSistema = await fetch("https://arkos.puntoreica.com/api/sistema/");
+            let responseBeneficios = await fetch("https://arkos.puntoreica.com/api/beneficios-sistema/");
             if (responseSistema.ok && responseBeneficios.ok) {
                 const response = {
                     sistema: await responseSistema.json(),

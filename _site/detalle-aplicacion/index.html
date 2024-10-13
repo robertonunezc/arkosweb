@@ -203,7 +203,7 @@
         }
         async getData() {
             const aplicacionId = localStorage.getItem('aplicacion-id');
-            let response = await fetch(`http://arkos.puntoreica.com/api/aplicaciones/detalle/${aplicacionId}`);
+            let response = await fetch(`https://arkos.puntoreica.com/api/aplicaciones/detalle/${aplicacionId}`);
             if (response.ok) {
                 return await response.json()
             } else {
@@ -218,8 +218,8 @@
             this.$descripcionAplicacion.innerText = data.descripcion;
             this.$imagenesAplicacion.innerHTML = data.imagenes.map(function (imagen) {
                 return `<figure class="image">
-                        <a href="http://arkos.puntoreica.com${imagen.imagen}" target="_blank"class="lightbox-image" title="${imagen.nombre}">
-                            <img src="http://arkos.puntoreica.com${imagen.imagen}"  width="50" alt=""></a>
+                        <a href="https://arkos.puntoreica.com${imagen.imagen}" target="_blank"class="lightbox-image" title="${imagen.nombre}">
+                            <img src="https://arkos.puntoreica.com${imagen.imagen}"  width="50" alt=""></a>
                     </figure>`
             });
         }

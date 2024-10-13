@@ -86,7 +86,7 @@ layout: "base.njk"
             this.$recursosContenedor = document.querySelector('#resources-container');
         }
         async getRecursos() {
-            let response = await fetch("http://arkos.puntoreica.com/api/recursos/");
+            let response = await fetch("https://arkos.puntoreica.com/api/recursos/");
             if (response.ok) {
                 return await response.json()
             } else {

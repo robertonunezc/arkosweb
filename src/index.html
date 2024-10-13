@@ -293,10 +293,10 @@ layout: "base.njk"
 			this.$testimonios = document.getElementById('contenedor-testimonios');
 		}
 		async getData() {
-			let responseInicio = await fetch("http://arkos.puntoreica.com/api/inicio/");
-			let responseCategorias = await fetch("http://arkos.puntoreica.com/api/inicio-categorias/");
-			let responseImagenesCategorias = await fetch("http://arkos.puntoreica.com/api/inicio-imagenes-categoria/");
-			let responseTestimonios = await fetch("http://arkos.puntoreica.com/api/inicio-comentarios-cliente/");
+			let responseInicio = await fetch("https://arkos.puntoreica.com/api/inicio/");
+			let responseCategorias = await fetch("https://arkos.puntoreica.com/api/inicio-categorias/");
+			let responseImagenesCategorias = await fetch("https://arkos.puntoreica.com/api/inicio-imagenes-categoria/");
+			let responseTestimonios = await fetch("https://arkos.puntoreica.com/api/inicio-comentarios-cliente/");
 			if (responseInicio.ok && responseCategorias.ok && responseImagenesCategorias.ok) {
 				return {
 					inicio: await responseInicio.json(),
